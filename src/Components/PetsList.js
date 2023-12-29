@@ -4,15 +4,25 @@ import { useState } from "react";
 
 function PetsList() {
   const [query, setQuery] = useState("");
+  const [type2, setType] = useState("");
   const petList = pets
     .filter((pet) => pet.name.toLowerCase().includes(query.toLowerCase()))
     .map((pet) => <PetItem pet={pet} key={pet.id} />);
+
+  // const petType = pets
+  pets
+    .filter((pet) => pet.type.includes(type2))
+    .map((pet) => <PetItem pet={pet} key={pet.type} />);
 
   const eventQuery = (e) => {
     setQuery(e.target.value);
   };
   console.log(query);
-
+  // function changeType() {
+  const setTypeSelector = (e) => {
+    setType(e.target.value);
+  };
+  console.log(type2);
   return (
     <section id="doctors" className="doctor-section pt-140">
       <div className="container">
@@ -34,7 +44,7 @@ function PetsList() {
               </div>
               <br />
               Type:
-              <select className="form-select">
+              <select onChange={setTypeSelector} className="form-select">
                 <option value="" selected>
                   All
                 </option>
